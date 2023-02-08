@@ -31,13 +31,92 @@
     <link
       rel="shortcut icon"
       type="image/jpg"
-      href="assets/img/mug-saucer-solid.svg"
+      href="assets/img/logo.png"
     />
     <title>coppola movie app</title>
 </head>
 <body>
-    <div>
-        <h1>Coppola movie app</h1>
+    <div class="wrapper">
+        <!-- header -->
+        <header>
+            <div class="logo">
+              <a id="logo" href="#home"><img src="./assets/img/logo.png" alt="Logo Image"></a>
+            </div>      
+            <nav class="main-nav" aria-label="main">                
+              <a href="#home">Home</a>
+              <a href="#tvShows">TV Shows</a>
+              <a href="#movies">Movies</a>
+              <a href="#originals">Originals</a>
+              <a href="#">Recently Added</a>
+              <a target="_blank" href="https://github.com/chicacode/coppola-movie-app">Portfolio</a>        
+            </nav>
+            <nav class="sub-nav" aria-label="sub-nav">
+              <a href="#"><i class="fas fa-search sub-nav-logo"></i></a>
+              <a href="#"><i class="fas fa-bell sub-nav-logo"></i></a>
+              <a href="#">Account</a>        
+            </nav>      
+          </header>
+        <section class="main-container">
+                <div class="popular" id="home">
+                    <h1 id="popular">Popular on Coppola Movie App</h1>
+                    <div class="box-container">
+                       
+                    </div>
+                </div>
+                <h1 id="trending">Trending Now</h1>
+                <div class="box">
+                    Trending
+                </div>
+
+                <h1 id="tv-shows">TV Shows</h1>
+                <div class="box">
+                    TV Shows
+                </div>
+
+                <h1 id="blockbuster-adventure">Blockbuster & Adventure</h1>
+                <div class="box">
+                    Blockbuster
+                </div>
+
+                <h1 id="originals">Originals</h1>
+                <div class="box">
+                    Originals
+                </div>
+
+        </section>
+
+
+        <section class="link">
+            <div class="logos-social-media">
+              <a href="#"><i class="fab fa-facebook-square fa-2x logo"></i></a>
+              <a href="#"><i class="fab fa-instagram fa-2x logo"></i></a>
+              <a href="#"><i class="fab fa-twitter fa-2x logo"></i></a>
+              <a href="#"><i class="fab fa-youtube fa-2x logo"></i></a>
+            </div>
+            <div class="sub-links">
+              <ul>
+                <li><a href="#">Audio and Subtitles</a></li>
+                <li><a href="#">Audio Description</a></li>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Gift Cards</a></li>
+                <li><a href="#">Media Center</a></li>
+                <li><a href="#">Investor Relations</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Legal Notices</a></li>
+                <li><a href="#">Corporate Information</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+          </section>
+          <!-- END OF LINKS -->
+      
+          <!-- FOOTER -->
+          <footer>
+            <p>&copy 2023 Coppola movie app, Inc.</p>
+            <p>Chicacode &copy 2023</p>
+          </footer>
     </div>
     <script src="/js/script.js"></script>
 </body>

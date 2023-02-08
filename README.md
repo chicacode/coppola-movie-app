@@ -9,6 +9,13 @@
  - `Search by movie name`
  - `Filter menu by movies or series based on genre`
 
+ ## UI development
+  ![alt text](./assets/img/movie-app.png "image")
+
+## Logo
+  ![alt text](./assets/img/logo.png "logo")
+
+
 ## Clone this App 
 `git clone: https://github.com/chicacode/coppola-movie-app.git`
  ## Tech stack used:
