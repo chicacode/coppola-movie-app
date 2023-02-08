@@ -17,7 +17,7 @@
   }
   
   img {
-    max-width: 100%;
+    max-width: 70%;
   }
   
   h1 {
@@ -117,8 +117,8 @@
     transform: scale(1.4);
   }
   
-  .box-container img {
-    border-radius: 2px;
+  .box-container div img {
+    border-radius: 20px;
   }
 
   /* LINKS */
