@@ -5,10 +5,12 @@
 1. Generate my own API KEY
 2. Use Fetch API to get the data
 3. Features:
- `Get list of movies by trending`
- `Search by movie name`
- `Filter menu by movies or series based on genre`
+ - `Get list of movies by trending`
+ - `Search by movie name`
+ - `Filter menu by movies or series based on genre`
 
+## Clone this App 
+`git clone: https://github.com/chicacode/coppola-movie-app.git`
  ## Tech stack used:
  - HTML5
  - CSS3
