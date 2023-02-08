@@ -107,19 +107,17 @@
     grid-template-columns: repeat(6, minmax(100px, 1fr));
   }
   
-  .box-container a {
-    transition: transform .3s;  
+  .box-container div img {
+    border-radius: 20px;
+    transition: transform .3s; 
   }
-  
-  .box-container a:hover {
+
+  .box-container div img:hover {
     transition: transform .3s;
     -ms-transform: scale(1.4);
     -webkit-transform: scale(1.4);  
     transform: scale(1.4);
-  }
-  
-  .box-container div img {
-    border-radius: 20px;
+    cursor: pointer;
   }
 
   /* LINKS */
@@ -147,9 +145,6 @@
   
   .logos-social-media a{
     padding: 10px;
-  }
-  
-  .logos-social-media a{
     color: var(--dark);
   }
   
