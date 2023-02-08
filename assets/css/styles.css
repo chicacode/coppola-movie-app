@@ -82,13 +82,14 @@
   
   .sub-nav {
     grid-area: sb;
-    padding: 0 40px 0 40px;
+    padding: 30px 40px 0 10px;
   }
   
   .sub-nav a {
     color: var(--light);
     text-decoration: none;
     margin: 5px;
+    font-size: 24px;
   }
   
   .sub-nav a:hover {
