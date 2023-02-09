@@ -1,33 +1,44 @@
 const APY_KEY = "939b31d73609c6b75cb2f11788ba538c";
+const BASE_URL = "https://api.themoviedb.org/3";
+const TRENDING_URL = BASE_URL + "/trending/all/day?api_key=" + APY_KEY;
+const SEARCH_URL = BASE_URL + '/search/movie?' + 'api_key=' + APY_KEY;
+const search = document.getElementById("search");
 
-let modifiedArray = [];
+// /genre/movie/list
 
+let movieList = [];
+
+let movieListCopy = [];
+// let inputValue = document.querySelector("#search-input");
+// console.log(inputValue.value)
 
 const generateUI = (array) => {
     let container = document.querySelector('.box-container');
-    array.forEach(({ poster_path, title, original_language,  overview }) => {
-       // Create an external div-container
-       let divContainer = document.createElement('div');
-       let img = document.createElement('img');
-       let name = document.createElement('h2');
-       let description = document.createElement('p');
-       let textContainer = document.createElement('div');
-       let language = document.createElement('span');
-       
-       img.src = poster_path;
-       name.textContent = `Name: ${title}`;
-       description.textContent = `Overview : ${overview}`
-       language.textContent = `Language: ${original_language} `
+    container.innerHTML = "";
+    console.log("que pasa aqui", array)
+    array.forEach(({ poster_path, title, original_language, overview }) => {
+        // Create an external div-container
+        let divContainer = document.createElement('div');
+        let img = document.createElement('img');
+        let name = document.createElement('h2');
+        let description = document.createElement('p');
+        let textContainer = document.createElement('div');
+        let language = document.createElement('span');
 
-       divContainer.appendChild(img);
+        img.src = poster_path;
+        name.textContent = `Name: ${title}`;
+        description.textContent = `Overview : ${overview}`
+        language.textContent = `Language: ${original_language} `
 
-       textContainer.appendChild(name);
-       textContainer.appendChild(description);
-       textContainer.appendChild(language);
+        divContainer.appendChild(img);
 
-       divContainer.appendChild(textContainer);
+        textContainer.appendChild(name);
+        textContainer.appendChild(description);
+        textContainer.appendChild(language);
 
-       container.appendChild(divContainer);
+        divContainer.appendChild(textContainer);
+
+        container.appendChild(divContainer);
 
     })
 }
@@ -35,25 +46,45 @@ const generateUI = (array) => {
 
 const parseList = (array) => {
 
-   return  array.map(({ title, name, original_language,  overview, poster_path}) => {
-       return {
-           title: title || name,
-           overview: overview || 0,
-           original_language: original_language,
-           poster_path: `https://image.tmdb.org/t/p/original/${poster_path}` || "https://via.placeholder.com/300"
-       }
-   })
+    return array.map(({ title, name, original_language, overview, poster_path }) => {
+        return {
+            title: title || name,
+            overview: overview || 0,
+            original_language: original_language,
+            poster_path: `https://image.tmdb.org/t/p/original/${poster_path}` || "https://via.placeholder.com/300"
+        }
+    })
+
 }
-const getMoviesData = async () => {
-    const data = await fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${APY_KEY}`);
-    const response = await data.json(); // Parse the data to JSON
+const getMoviesData = async (url) => {
+    const data = await fetch(url);
+    const response = await data.json();
+    movieList = parseList(response.results);
 
-    console.log("Response:", response.results);
-
-    let modifiedArray = parseList(response.results);
-
-    // Generate UI on the basis of modifiedArray
-    generateUI(modifiedArray);
+    generateUI(movieList);
 }
 
-getMoviesData()
+getMoviesData(TRENDING_URL);
+
+const searchMovie = () => {
+
+    let searchKeyword = document.getElementById('search-input');
+
+    console.log("movieList 1", movieList);
+
+    let moviesFiltered = movieList.filter((movie) => {
+
+        if (movie.title.includes(searchKeyword.value)) {
+            // console.log(" entra en true", movie.title)
+            // return true;
+            return movie.title
+        }
+    }) 
+
+    movieList = moviesFiltered;
+    console.log("que retorna moviesFiltered??? ", moviesFiltered)
+    console.log("que retorna filter??? ", movieList)
+    generateUI(movieList);
+
+}
+
