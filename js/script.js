@@ -9,15 +9,13 @@ const search = document.getElementById("search");
 let movieList = [];
 
 let movieListCopy = [];
-// let inputValue = document.querySelector("#search-input");
-// console.log(inputValue.value)
 
 const generateUI = (array) => {
     let container = document.querySelector('.box-container');
-    container.innerHTML = "";
+    container.innerHTML = '';
     console.log("que pasa aqui", array)
     array.forEach(({ poster_path, title, original_language, overview }) => {
-        // Create an external div-container
+
         let divContainer = document.createElement('div');
         let img = document.createElement('img');
         let name = document.createElement('h2');
@@ -60,31 +58,25 @@ const getMoviesData = async (url) => {
     const data = await fetch(url);
     const response = await data.json();
     movieList = parseList(response.results);
-
     generateUI(movieList);
 }
 
 getMoviesData(TRENDING_URL);
 
 const searchMovie = () => {
-
     let searchKeyword = document.getElementById('search-input');
-
-    console.log("movieList 1", movieList);
-
     let moviesFiltered = movieList.filter((movie) => {
+        let value = searchKeyword.value.toLowerCase();
+        console.log("VALUE", value)
 
-        if (movie.title.includes(searchKeyword.value)) {
-            // console.log(" entra en true", movie.title)
-            // return true;
-            return movie.title
+        if (movie.title.toLowerCase().indexOf(value) != -1) {
+            console.log("se cumple")
+            return true;
         }
-    }) 
+    })
 
     movieList = moviesFiltered;
-    console.log("que retorna moviesFiltered??? ", moviesFiltered)
-    console.log("que retorna filter??? ", movieList)
+    console.log("movieList", movieList)
     generateUI(movieList);
-
 }
 
