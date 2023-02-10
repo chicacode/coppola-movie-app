@@ -6,6 +6,7 @@ const search = document.getElementById("search");
 
 const searchKeyword = document.getElementById('search-input');
 const selectYear = document.getElementById("select-year");
+const selectGenre = document.getElementById("select-genre");
 // /genre/movie/list
 
 let movieList = [];
@@ -91,7 +92,7 @@ const fillSelectByYear = (movieList) =>{
         return "2022-11-09";
         
     });
-    console.log(".release_date years:::", years)
+
     for (let index = 0; index < years.length; index++) {
         const option = document.createElement("option");
         option.value = years[index];
@@ -112,6 +113,11 @@ searchKeyword.addEventListener("keyup", e => {
 selectYear.addEventListener("change", e => {
     dataMovie.release_date = e.target.value;
     FilterMovie();
+})
+
+selectGenre.addEventListener("change", e => {
+    // dataMovie.release_date = e.target.value;
+    // FilterMovie();
 })
 
 const FilterMovie = () => {

@@ -12,6 +12,8 @@
  ## UI development
   ![alt text](./assets/img/movie-app.png "image")
 
+   ![alt text](./assets/img/movie-app-evolution.png "image")
+
 ## Logo
   ![alt text](./assets/img/logo.png "logo")
 
