@@ -112,6 +112,8 @@
   .search{
     position: relative;
     top: 100px;
+    display: flex;
+    justify-content: space-between;
   }
 
   .search-input{
@@ -125,6 +127,7 @@
     background-repeat: no-repeat;
     background-size: 7%;
     background-position: 4px;
+    margin-right: 10px;
   }
 
   ::placeholder {
@@ -132,6 +135,24 @@
     font-size: 1rem;
     padding: 30px;
     text-transform: capitalize;
+  }
+
+  #select-year{
+    width: 200px;
+    border-radius: 20px;
+    outline: none;
+    appearance: none;
+    outline: 0;
+    border: 0;
+    box-shadow: none;
+    /* Personalize */
+    flex: 1;
+    padding: 0 1em;
+    color: #1d1d1d;
+    background-color: rgb(241, 237, 237);
+    background-image: none;
+    cursor: pointer;
+
   }
 
   /* main container */
