@@ -7,6 +7,7 @@ const search = document.getElementById("search");
 const searchKeyword = document.getElementById('search-input');
 const selectYear = document.getElementById("select-year");
 const selectGenre = document.getElementById("select-genre");
+const divNoResult = document.getElementById("no-result");
 // /genre/movie/list
 
 let movieList = [];
@@ -106,7 +107,6 @@ const data = {
 
 
 const generateUI = (array) => {
-  // console.log("que hay aqui parseado", array)
   let container = document.querySelector('.box-container');
   container.innerHTML = '';
   array.forEach(({ poster_path, title, original_language, overview, release_date }) => {
@@ -117,13 +117,18 @@ const generateUI = (array) => {
     let description = document.createElement('p');
     let textContainer = document.createElement('div');
     let language = document.createElement('span');
-    let date = document.createElement('span');
+    let date = document.createElement('div');
 
     img.src = poster_path;
-    name.textContent = `Name: ${title}`;
-    description.textContent = `Overview : ${overview}`
-    language.textContent = `Language: ${original_language} `
+    name.textContent = `${title}`;
+    description.textContent = `Overview: ${overview}`
+    description.classList.add("truncate", "description-overview");
+    language.textContent = `Language:${original_language} `
     date.textContent = `Release date: ${release_date}`
+
+    language.classList.add("titles");
+    date.classList.add("titles");
+    divContainer.classList.add("card-box-container")
     divContainer.appendChild(img);
 
     textContainer.appendChild(name);
@@ -146,7 +151,7 @@ const parseList = (array) => {
       overview: overview || 0,
       original_language: original_language,
       poster_path: `https://image.tmdb.org/t/p/original/${poster_path}` || "https://via.placeholder.com/300",
-      release_date: release_date || 0,
+      release_date: release_date || "Date not available",
       genre_ids: genre_ids
     }
   })
@@ -160,12 +165,8 @@ const getMoviesData = async (url) => {
   fillSelectByYear(movieList);
 }
 
-
-
 document.addEventListener("DOMContentLoaded", () => {
   getMoviesData(TRENDING_URL);
-
-  // fillSelectByYear();
   fillSelectByGenre(data);
 })
 
@@ -212,8 +213,7 @@ selectYear.addEventListener("change", e => {
 
 selectGenre.addEventListener("change", e => {
   dataMovie.genre_ids.push(Number(e.target.value));
-  console.log("dataMovie.genre_ids ADD EVENT LISTENER", dataMovie.genre_ids)
-  filterByGenre(movieList);
+  FilterMovieByGender(Number(e.target.value));
 })
 
 // Filters
@@ -223,8 +223,26 @@ const FilterMovie = () => {
   return generateUI(result);
 }
 
-const filterByName = (movie) => {
+const FilterMovieByGender = (genderId) => {
 
+  let result = filterByGenre(movieList, genderId)
+  // console.log("que es result.length", result.length)
+  if (result.length) {
+    return generateUI(result);
+  } 
+  // else {
+  //   noResult();
+  // }
+}
+
+const noResult = () => {
+  const noResult = document.createElement("div");
+  noResult.classList.add("alert", "error");
+  noResult.textContent = "No results by Gender available";
+  divNoResult.appendChild(noResult);
+}
+
+const filterByName = (movie) => {
   const { title } = dataMovie;
   if (title) {
     return movie.title.toLowerCase().includes(title);
@@ -233,7 +251,6 @@ const filterByName = (movie) => {
 }
 
 const filterByYear = (movie) => {
-
   const { release_date } = dataMovie;
   if (release_date) {
     return movie.release_date === release_date;
@@ -241,44 +258,12 @@ const filterByYear = (movie) => {
   return movie;
 }
 
-
-
-// TODO FIX this
-// Me tocara hacer un fetch de genres
-const filterByGenre = (movie) => {
-  const { genre_ids } = dataMovie;
-  const [newGender ] = genre_ids
-  console.log(" newGender",  newGender)
-  if (genre_ids) {
-  //  console.log(" movie",  movie)
-   let newArray = movie.filter(function (el)
- 
-   {
-    console.log(" EL ",  el.genre_ids)
-     return el.genre_ids.includes(newGender)
-   }
-   );
-   console.log(" newArray", newArray);
-  //  return movie.map(({ title, name, original_language, overview, poster_path, release_date, genre_ids }) => {
-
-  //    return genresList.push({
-  //       title: title,
-  //       overview: overview || 0,
-  //       original_language: original_language,
-  //       poster_path: `https://image.tmdb.org/t/p/original/${poster_path}` || "https://via.placeholder.com/300",
-  //       release_date: release_date || 0,
-  //       genre_ids: genre_ids
-  //     })})
-// Estoy mejorando
-
-  generateUI(newArray)
-  //   }
-
-  //   console.log("genresList", genresList)
-}
-return movie
-
+const filterByGenre = (movie, genderId) => {
+  if (genderId) {
+    genresList = movie.filter((el) => {
+      return el.genre_ids.includes(genderId)
+    });
+    return genresList;
   }
-
-  // console.log("Number(genre_ids)",  Number(genre_ids))
-  // console.log("Que es mo en filter",  mo.genre_ids.includes(Number(genre_ids)))
+  return movie;
+}
