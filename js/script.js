@@ -8,7 +8,6 @@ const searchKeyword = document.getElementById('search-input');
 const selectYear = document.getElementById("select-year");
 const selectGenre = document.getElementById("select-genre");
 const divNoResult = document.getElementById("no-result");
-// /genre/movie/list
 
 let movieList = [];
 let genresList = []
@@ -158,11 +157,17 @@ const parseList = (array) => {
 
 }
 const getMoviesData = async (url) => {
-  const data = await fetch(url);
-  const response = await data.json();
-  movieList = parseList(response.results);
-  generateUI(movieList);
-  fillSelectByYear(movieList);
+
+  try {
+    const data = await fetch(url);
+    const response = await data.json();
+    movieList = parseList(response.results);
+    generateUI(movieList);
+    fillSelectByYear(movieList);
+  } catch (e) {
+    console.log("Error: no data available")
+  }
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -176,7 +181,6 @@ const fillSelectByYear = (movieList) => {
       return a.release_date;
     }
     return "2022-11-09";
-
   });
 
   for (let index = 0; index < years.length; index++) {
@@ -229,7 +233,7 @@ const FilterMovieByGender = (genderId) => {
   // console.log("que es result.length", result.length)
   if (result.length) {
     return generateUI(result);
-  } 
+  }
   // else {
   //   noResult();
   // }
